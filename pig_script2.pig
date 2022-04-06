@@ -15,7 +15,7 @@ pelis_join1 = join pelis by id, countOpinions by id using 'replicated';
 pelis_opinions = foreach pelis_join1 generate pelis::id as id, pelis::nom_pelicula as nom_pelicula, countOpinions::n_comentaris as n_opinions, countOpinions::l_positives as l_positives, countOpinions::l_negatives as l_negatives, countOpinions::l_total as l_total;
 
 tokens = foreach comentaris generate id,label,text, FLATTEN(TOKENIZE(text)) As word;
-dictionary = load '/user/cloudera/pig_analisis_opinions/AFINN.txt' using PigStorage('\t') AS(word:chararray,rating:int);
+dictionary = load '/user/cloudera/pig_practica/AFINN.txt' using PigStorage('\t') AS(word:chararray,rating:int);
 word_rating = join tokens by word left outer, dictionary by word using 'replicated';
 rating = foreach word_rating generate tokens::id as id,tokens::text as text, tokens::label as label, dictionary::rating as rate;
 word_group = group rating by id;
