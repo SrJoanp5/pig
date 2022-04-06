@@ -1,7 +1,3 @@
-/*-- set the debug mode on 
-SET debug 'on'
--- set a job name of your job.
-SET job.name 'my job'*/
 REGISTER /usr/lib/pig/piggybank.jar;
 extract_details = LOAD '/user/cloudera/pig_analisis_opinions/critiquescinematografiques.csv' USING org.apache.pig.piggybank.storage.CSVExcelStorage(',', 'YES_MULTILINE')  AS (text:chararray, label:int, id:int);
 tokens = foreach extract_details generate id,label,text, FLATTEN(TOKENIZE(text)) As word;
