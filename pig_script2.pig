@@ -1,7 +1,7 @@
 REGISTER /usr/lib/pig/piggybank.jar;
 /* comentaris = LOAD '/user/cloudera/WorkspacePigPractica/resultat_analisis_opinions/part-m-00000' USING org.apache.pig.piggybank.storage.CSVExcelStorage(',', 'YES_MULTILINE')  AS (id:int, text:chararray, label:int, c:int, AVG:float); */
 comentaris = LOAD '/user/cloudera/pig_practica/critiquescinematografiques.csv' USING org.apache.pig.piggybank.storage.CSVExcelStorage(',', 'YES_MULTILINE')  AS (text:chararray, label:int, id:int);
-pelis = LOAD '/user/cloudera/WorkspacePigPractica/titolpelis.csv' USING org.apache.pig.piggybank.storage.CSVExcelStorage(',', 'YES_MULTILINE')  AS (id:int, nom_pelicula:chararray);
+pelis = LOAD '/user/cloudera/pig_practica/titolpelis.csv' USING org.apache.pig.piggybank.storage.CSVExcelStorage(',', 'YES_MULTILINE')  AS (id:int, nom_pelicula:chararray);
 comentaris_group = group comentaris by id;
 
 /* Per cada id contam les labels positives i les negatives */
